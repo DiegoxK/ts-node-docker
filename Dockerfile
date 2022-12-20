@@ -1,4 +1,4 @@
-FROM node:14 as base
+FROM znck/pnpm as base
 
 WORKDIR /home/node/app
 
@@ -8,8 +8,10 @@ RUN pnpm i
 
 COPY . .
 
+ENV PORT=8080
+
 FROM base as production
 
 ENV NODE_PATH=./dist
 
-RUN npm run build
+RUN pnpm run build
